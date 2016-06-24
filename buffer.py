@@ -5,7 +5,7 @@ from datetime import datetime
 FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_integer('variable_size', 1024, """Variable size.""")
-tf.app.flags.DEFINE_integer('batch_size', 100, """benchmark iteration size.""")
+tf.app.flags.DEFINE_integer('batch_size', 10, """benchmark iteration size.""")
 tf.app.flags.DEFINE_string('node_name', None, """Node name (job)""")
 tf.app.flags.DEFINE_integer('task_index', 0, """task index""")
 tf.app.flags.DEFINE_bool('enable_trace', False, 'Enable trace')
@@ -33,15 +33,15 @@ def time_tensorflow_run(sess, init_op, buf_op):
                 if not i % 10:
                     print ('%s: step %d, duration = %.3f' %
                         (datetime.now(), i - num_steps_burn_in, duration))
-                total_duration += duration
+            total_duration += duration
 
     avg_total_duration = total_duration / (FLAGS.batch_size + num_steps_burn_in)
     print ("total_duration avg = %.6f" % avg_total_duration)
 
 def main(_):
     cluster = tf.train.ClusterSpec({
-       "ps": ["geeker-3.news.cs.nyu.edu:2222"],
-       "worker": ["geeker-4.news.cs.nyu.edu:2223"]
+       "ps": ["geeker-4.news.cs.nyu.edu:2222"],
+       "worker": ["geeker-3.news.cs.nyu.edu:2223"]
         }) 
     server = tf.train.Server(cluster,
                             job_name=FLAGS.node_name, 
