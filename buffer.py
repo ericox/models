@@ -1,3 +1,9 @@
+"""
+buffer.py times a simple tf.round(buff) on a ones variable of length variable_size
+
+Author:
+Eric Cox
+"""
 import tensorflow as tf
 import time
 from datetime import datetime

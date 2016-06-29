@@ -1,3 +1,10 @@
+"""
+parbuffer.py times the communication of a variable buff and a simple operation tf.round(buff)
+
+Author:
+Eric Cox
+"""
+
 import tensorflow as tf
 import time
 from datetime import datetime
